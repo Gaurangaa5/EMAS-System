@@ -1,14 +1,26 @@
-import { db } from "./firebase.js";
-import { ref, set } from "firebase/database";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getDatabase, ref, set } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDTexhEk_vhwe9X0lR4_hXE2kiZ9puTx5w",
+  authDomain: "emas-system.firebaseapp.com",
+  databaseURL: "https://emas-system-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "emas-system",
+  storageBucket: "emas-system.firebasestorage.app",
+  messagingSenderId: "1004123239278",
+  appId: "1:1004123239278:web:eca24f9c6304eae643077f"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
 const input = document.getElementById("inputText");
 const button = document.getElementById("syncBtn");
 
-button.addEventListener("click", async () => {
+button.addEventListener("click", () => {
+  console.log("SYNC CLICKED");
 
-  await set(ref(db, "emas/display"), {
+  set(ref(db, "emas/display"), {
     text: input.value
   });
-
-  alert("Synced!");
 });
