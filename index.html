@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMAS SYSTEM</title>
+
+  <style>
+    @font-face {
+      font-family: "MerchantCopy";
+      src: url("./merchant-copy-doublesize.ttf") format("truetype");
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "MerchantCopy", monospace;
+    }
+
+    body {
+      margin: 0;
+      background: #000;
+      color: #00ff00;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      text-align: center;
+      border: 4px solid #00ff00;
+      padding: 40px;
+      background: #111;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 20px;
+      margin-bottom: 40px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    button {
+      font-size: 32px;
+      padding: 20px;
+
+      background: black;
+      color: #00ff00;
+
+      border: 3px solid #00ff00;
+
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background: #00ff00;
+      color: black;
+    }
+
+    .footer {
+      margin-top: 30px;
+      font-size: 16px;
+      opacity: 0.8;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+
+    <h1>EMAS SYSTEM</h1>
+
+    <p>
+      SELECT A PAGE
+    </p>
+
+    <div class="buttons">
+
+      <button onclick="location.href='admin.html'">
+        ADMIN PANEL
+      </button>
+
+      <button onclick="location.href='display.html'">
+        DISPLAY SCREEN
+      </button>
+
+    </div>
+
+    <div class="footer">
+      EMAS CONTROL NETWORK
+    </div>
+
+  </div>
+
+</body>
+</html>
