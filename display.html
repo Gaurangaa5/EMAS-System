@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>EMAS Display</title>
+
+  <style>
+
+    @font-face {
+      font-family: "MerchantCopy";
+      src: url("./merchant-copy-doublesize.ttf") format("truetype");
+    }
+
+    body {
+      margin: 0;
+      background: black;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      height: 100vh;
+    }
+
+    #displayText {
+      font-family: "MerchantCopy";
+      color: lime;
+      font-size: 72px;
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id="displayText">
+  WAITING...
+</div>
+
+<script type="module" src="./display.js"></script>
+
+</body>
+</html>

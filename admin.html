@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMAS Control Centre</title>
+
+  <style>
+    @font-face {
+      font-family: "MerchantCopy";
+      src: url("./merchant-copy-doublesize.ttf") format("truetype");
+    }
+
+    * {
+      box-sizing: border-box;
+      font-family: "MerchantCopy", monospace;
+    }
+
+    body {
+      margin: 0;
+      background: #0a0a0a;
+      color: #00ff00;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .panel {
+      width: 90%;
+      max-width: 900px;
+      border: 4px solid #00ff00;
+      padding: 30px;
+      background: #111;
+    }
+
+    .title {
+      text-align: center;
+      font-size: 42px;
+      margin-bottom: 30px;
+      letter-spacing: 2px;
+    }
+
+    .label {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    #inputText {
+      width: 100%;
+      font-size: 28px;
+      padding: 15px;
+      background: black;
+      color: #00ff00;
+      border: 3px solid #00ff00;
+      outline: none;
+    }
+
+    .buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+    }
+
+    button {
+      flex: 1;
+      padding: 15px;
+      font-size: 24px;
+      background: black;
+      color: #00ff00;
+      border: 3px solid #00ff00;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #00ff00;
+      color: black;
+    }
+
+    .preview-box {
+      margin-top: 30px;
+      border: 3px dashed #00ff00;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .preview-title {
+      font-size: 20px;
+      margin-bottom: 10px;
+    }
+
+    #previewText {
+      font-size: 48px;
+      min-height: 60px;
+      word-wrap: break-word;
+    }
+
+    .status {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="panel">
+
+    <div class="title">
+      EMAS CONTROL CENTRE
+    </div>
+
+    <div class="label">
+      MESSAGE:
+    </div>
+
+    <input
+      id="inputText"
+      type="text"
+      placeholder="TYPE MESSAGE HERE"
+      maxlength="100"
+    >
+
+    <div class="buttons">
+      <button id="syncBtn">SYNC</button>
+      <button id="clearBtn">CLEAR</button>
+    </div>
+
+    <div class="preview-box">
+      <div class="preview-title">
+        LIVE PREVIEW
+      </div>
+
+      <div id="previewText">
+        ---
+      </div>
+    </div>
+
+    <div class="status" id="status">
+      READY
+    </div>
+
+  </div>
+
+  <script type="module" src="./admin.js"></script>
+
+  <script>
+    const input = document.getElementById("inputText");
+    const preview = document.getElementById("previewText");
+    const clearBtn = document.getElementById("clearBtn");
+
+    input.addEventListener("input", () => {
+      preview.textContent = input.value || "---";
+    });
+
+    clearBtn.addEventListener("click", () => {
+      input.value = "";
+      preview.textContent = "---";
+    });
+  </script>
+
+</body>
+</html>
