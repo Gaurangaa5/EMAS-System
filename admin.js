@@ -23,17 +23,14 @@ const status = document.getElementById("status");
 function syncMessage() {
   const message = input.value.trim();
 
-  if (message === "") {
-    status.textContent = "MESSAGE IS EMPTY";
-    return;
-  }
-
   set(ref(db, "emas/display"), {
     text: message
   })
     .then(() => {
-      previewText.textContent = message;
-      status.textContent = "SYNC SUCCESSFUL";
+      previewText.textContent = message || "---";
+      status.textContent = message
+        ? "SYNC SUCCESSFUL"
+        : "DISPLAY CLEARED";
 
       input.value = "";
     })
@@ -48,7 +45,7 @@ input.addEventListener("input", () => {
   previewText.textContent = input.value || "---";
 });
 
-// Sync button
+// SYNC button
 syncBtn.addEventListener("click", syncMessage);
 
 // Press Enter to sync
@@ -59,9 +56,18 @@ input.addEventListener("keydown", (event) => {
   }
 });
 
-// Clear button
+// CLEAR button
 clearBtn.addEventListener("click", () => {
-  input.value = "";
-  previewText.textContent = "---";
-  status.textContent = "READY";
+  set(ref(db, "emas/display"), {
+    text: ""
+  })
+    .then(() => {
+      input.value = "";
+      previewText.textContent = "---";
+      status.textContent = "DISPLAY CLEARED";
+    })
+    .catch((error) => {
+      console.error(error);
+      status.textContent = "CLEAR FAILED";
+    });
 });
