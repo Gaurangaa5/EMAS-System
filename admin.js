@@ -15,12 +15,53 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 const input = document.getElementById("inputText");
-const button = document.getElementById("syncBtn");
+const syncBtn = document.getElementById("syncBtn");
+const clearBtn = document.getElementById("clearBtn");
+const previewText = document.getElementById("previewText");
+const status = document.getElementById("status");
 
-button.addEventListener("click", () => {
-  console.log("SYNC CLICKED");
+function syncMessage() {
+  const message = input.value.trim();
+
+  if (message === "") {
+    status.textContent = "MESSAGE IS EMPTY";
+    return;
+  }
 
   set(ref(db, "emas/display"), {
-    text: input.value
-  });
+    text: message
+  })
+    .then(() => {
+      previewText.textContent = message;
+      status.textContent = "SYNC SUCCESSFUL";
+
+      input.value = "";
+    })
+    .catch((error) => {
+      console.error(error);
+      status.textContent = "SYNC FAILED";
+    });
+}
+
+// Live preview while typing
+input.addEventListener("input", () => {
+  previewText.textContent = input.value || "---";
+});
+
+// Sync button
+syncBtn.addEventListener("click", syncMessage);
+
+// Press Enter to sync
+input.addEventListener("keydown", (event) => {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    syncMessage();
+  }
+});
+
+// Clear button
+clearBtn.addEventListener("click", () => {
+  input.value = "";
+  previewText.textContent = "---";
+  status.textContent = "READY";
 });
