@@ -14,11 +14,50 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
-const text = document.getElementById("displayText");
+const displayText = document.getElementById("displayText");
+
+let currentMessage = "";
+let waitingInterval = null;
+
+function startWaitingAnimation() {
+  if (waitingInterval) return;
+
+  let dots = 1;
+
+  waitingInterval = setInterval(() => {
+    if (currentMessage === "") {
+      displayText.textContent = "Waiting" + ".".repeat(dots);
+
+      dots++;
+
+      if (dots > 3) {
+        dots = 1;
+      }
+    }
+  }, 500);
+}
+
+function stopWaitingAnimation() {
+  if (waitingInterval) {
+    clearInterval(waitingInterval);
+    waitingInterval = null;
+  }
+}
+
+startWaitingAnimation();
 
 onValue(ref(db, "emas/display"), (snapshot) => {
   const data = snapshot.val();
-  console.log("DATA:", data);
 
-  text.innerText = data?.text || "WAITING...";
+  if (data && data.text && data.text.trim() !== "") {
+    currentMessage = data.text;
+
+    stopWaitingAnimation();
+
+    displayText.textContent = currentMessage;
+  } else {
+    currentMessage = "";
+
+    startWaitingAnimation();
+  }
 });
